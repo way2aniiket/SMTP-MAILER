@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f3f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .email-form-container {
+            width: 600px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .email-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .email-header h2 {
+            margin: 0;
+            font-size: 16px;
+        }
+        .email-header .close-btn {
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .email-form {
+            width: 100%;
+            margin-top: 20px;
+        }
+        .email-form input, 
+        .email-form textarea {
+            padding: 10px;
+            width: -webkit-fill-available;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .email-form textarea {
+            resize: none;
+            height: 200px;
+        }
+        .email-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .send-btn {
+            background-color: #1a73e8;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .send-btn:hover {
+            background-color: #1558b3;
+        }
+        .other-options {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .other-options span {
+            cursor: pointer;
+            color: #1a73e8;
+            font-size: 14px;
+        }
+        .toCC{
+            display: flex;
+        }
+        .toCC span{
+            display: flex;
+            float: right;
+            align-self: center;
+        }
+        .toCC span a{
+            text-decoration: underline;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="email-form-container">
+        <div class="email-header">
+            <h2>New Message</h2>
+            <span class="close-btn">&times;</span>
+        </div>
+        <form autocomplete="off" class="email-form" action="/sendEmail" method="post" enctype="multipart/form-data">
+            <div class="toCC">
+                <input type="text" name="to" placeholder="To">
+                <span>
+                    <a id="openCC">Cc</a>
+                    <a id="openBCC">Bcc</a>
+                </span>
+            </div>
+            <input type="hidden" name="cc" id="cc" placeholder="Cc" />
+            <input type="hidden" name="bcc" id="bcc" placeholder="Bcc" />
+            <input type="text" name="subject" placeholder="Subject">
+            <textarea name="message" placeholder="Compose your email..."></textarea>
+            
+            <div class="email-footer">
+                <div class="other-options">
+                    <span id="attachFiles">Attach Files</span>
+                    <input type="file" name="files" id="files" multiple>
+                    <!-- <span>More Options</span> -->
+                </div>
+                <button type="submit" class="send-btn">Send</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
+<script>
+    document.getElementById('openCC').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default link behavior
+    document.getElementById('cc').type = 'text'; // Change the input type from hidden to text
+    });
+    document.getElementById('openBCC').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default link behavior
+    document.getElementById('bcc').type = 'text'; // Change the input type from hidden to text
+    document.getElementById('bcc').style.fontSize('') = 'text'; // Change the input type from hidden to text
+});
+
+</script>
